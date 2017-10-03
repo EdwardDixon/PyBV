@@ -3,7 +3,6 @@ import unittest
 from he.bv.basic import BVTensor
 from he.keys import KeyPair
 import numpy as np
-from syft import TensorBase
 
 
 class addition_test(unittest.TestCase):
@@ -13,8 +12,10 @@ class addition_test(unittest.TestCase):
         self.keys.generate()
 
     def test_add(self):
-        a = BVTensor(self.keys.pk(), np.asarray([40,2]), True, self.keys.sk)
-        b = a + 2.0
+        a = BVTensor(self.keys.pk(), np.asarray([40,2]), True, self.keys.sk())
+
+        # integers only, for now!
+        b = a + 2
         # TODO decrypt, check plaintext result
 
 
@@ -24,8 +25,10 @@ class multiplication_test(unittest.TestCase):
         self.keys = KeyPair()
         self.keys.generate()
 
-    def test_mul_by_scalarinv(self):
-        a = BVTensor(self.keys.pk(), np.asarray([21]), True, self.keys.sk)
+    def test_mul_by_scalar(self):
+        a = BVTensor(self.keys.pk(), np.asarray([21]), True, self.keys.sk())
+
+        # Integers only, for now!
         b = a * 2
         # TODO decrypt, check plaintext result
 
